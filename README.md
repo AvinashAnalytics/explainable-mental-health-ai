@@ -7,6 +7,9 @@
 **Production-ready mental health AI system** combining classical ML models (BERT/RoBERTa/DistilBERT) with LLM explanations (Groq/OpenAI) for stable classification and human-readable rationales.
 
 Implements research papers: [arXiv:2401.02984](https://arxiv.org/abs/2401.02984) (Stable Classification) + [arXiv:2304.03347](https://arxiv.org/abs/2304.03347) (Token Explanations)
+![App Demo](https://github.com/AvinashAnalytics/explainable-mental-health-ai/blob/main/app_demo.gif)
+
+
 
 ---
 
