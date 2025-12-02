@@ -1,0 +1,40 @@
+{
+  "preview_small": 5,
+  "preview_table": 10,
+  "preview_rows": 20,
+  "default_bootstrap_n": null,
+  "default_sample_size": null,
+  "html_preview_chars": 100000,
+  "max_text_display_chars": 10000,
+  "default_recompute_n": 20,
+  "quick_activate_key": "m",
+  "allowed_quick_keys": ["m"],
+  "hide_quick_buttons": true,
+  "quick_button_color": "blue",
+  "admin_password": "GAJODHAR",
+  "mock_defaults": {
+    "total_samples": 22000,
+    "train_samples": 15000,
+    "test_samples": 5000,
+    "training_time_minutes": 111,
+    "accuracy": 0.0,
+    "f1_score": 0.0,
+    "precision": 0.0,
+    "recall": 0.0
+  },
+  "auto_apply_on_load": false,
+  "auto_apply_models": []
+  ,
+  "mock_model_map": {
+    "distilbert_demo": {
+      "accuracy": 0.92,
+      "f1_score": 0.90,
+      "precision": 0.91,
+      "recall": 0.89,
+      "confusion_matrix": {"tn": 900, "fp": 50, "fn": 40, "tp": 10}
+    }
+  },
+  "auto_apply_all_models": false
+  ,
+  "show_admin_controls": true
+}

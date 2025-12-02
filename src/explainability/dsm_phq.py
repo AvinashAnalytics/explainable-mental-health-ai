@@ -1,0 +1,20 @@
+DSM_PHQ_MAPPING = {
+  1: {"phq_label":"Little interest or pleasure in doing things","dsm_criteria":"Anhedonia (loss of interest or pleasure)",
+      "keywords":["lost interest","don’t enjoy","dont enjoy","nothing excites","no motivation","bored"]},
+  2: {"phq_label":"Feeling down, depressed, or hopeless","dsm_criteria":"Depressed mood most of the day",
+      "keywords":["hopeless","empty","depressed","down","crying","pointless","sad"]},
+  3: {"phq_label":"Trouble falling or staying asleep, or sleeping too much","dsm_criteria":"Insomnia or hypersomnia nearly every day",
+      "keywords":["cant sleep","can't sleep","no sleep","awake all night","oversleep","restless"]},
+  4: {"phq_label":"Feeling tired or having little energy","dsm_criteria":"Fatigue or loss of energy",
+      "keywords":["no energy","exhausted","drained","tired","fatigued","can't get up","cant get up"]},
+  5: {"phq_label":"Poor appetite or overeating","dsm_criteria":"Significant weight loss or gain, or change in appetite",
+      "keywords":["no appetite","overeating","lost appetite","binge","weight loss","eating less"]},
+  6: {"phq_label":"Feeling bad about yourself — or that you are a failure","dsm_criteria":"Feelings of worthlessness or excessive guilt",
+      "keywords":["useless","worthless","failure","hate myself","ashamed","guilt"]},
+  7: {"phq_label":"Trouble concentrating on things","dsm_criteria":"Diminished ability to think or concentrate",
+      "keywords":["cant focus","can't focus","distracted","forget","mind blank","cant concentrate","can't concentrate"]},
+  8: {"phq_label":"Moving or speaking slowly / restlessness","dsm_criteria":"Psychomotor agitation or retardation",
+      "keywords":["slow","sluggish","restless","fidget","pacing"]},
+  9: {"phq_label":"Thoughts of death or self-harm","dsm_criteria":"Recurrent thoughts of death or suicidal ideation",
+      "keywords":["suicide","end my life","dont want to live","don't want to live","die","kill myself"]}
+}

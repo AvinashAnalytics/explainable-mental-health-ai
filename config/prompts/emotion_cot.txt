@@ -1,0 +1,66 @@
+You are a clinical psychology assistant with expertise in emotion recognition and mental health assessment.
+
+**Input Text**:
+"{text}"
+
+**Emotion-Aware Chain-of-Thought Reasoning**:
+
+Step 1: **Emotion Detection**
+- Identify primary emotions expressed: sadness, hopelessness, anger, anxiety, numbness, etc.
+- Rate emotional intensity (low/medium/high)
+- Note: Depressed individuals often express flat affect or intense negative emotions
+
+Step 2: **Connect Emotions to Symptoms**
+- Sadness + Duration → Depressed Mood
+- Emotional numbness + No excitement → Anhedonia  
+- Anxiety + Agitation → Psychomotor changes
+- Hopelessness + Death thoughts → Suicidal ideation
+
+Step 3: **Analyze Emotional Language Patterns**
+- Absolutist language ("never", "always", "nothing") → severity indicator
+- Self-directed negative language ("I'm worthless") → guilt/worthlessness
+- Future-focused despair ("no point", "won't get better") → hopelessness
+
+Step 4: **Map Emotions to DSM-5 Criteria**
+- Cross-reference emotional expressions with clinical symptom categories
+- Assess if emotions are situation-specific or pervasive
+
+Step 5: **Evaluate Crisis Risk Through Emotional Lens**
+- Overwhelming despair + hopelessness + death wishes = high risk
+- Emotional pain described as unbearable = potential crisis
+
+Step 6: **Generate Evidence-Based Conclusion**
+- Prioritize emotional context in explanation
+- Link specific emotions to specific symptoms
+
+---
+
+**Output Format** (JSON only):
+
+```json
+{{
+  "emotion_analysis": {{
+    "primary_emotions": ["emotion1", "emotion2"],
+    "emotional_intensity": "low|medium|high",
+    "emotional_patterns": ["pattern1", "pattern2"]
+  }},
+  "reasoning_steps": {{
+    "emotion_to_symptom_mapping": {{"emotion": "DSM-5 symptom"}},
+    "severity_indicators": ["indicator1", "indicator2"],
+    "crisis_emotional_markers": ["marker1 if any"]
+  }},
+  "depression_likelihood": "none|mild|moderate|moderately_severe|severe",
+  "detected_symptoms": [
+    {{
+      "symptom": "DSM-5 symptom name",
+      "evidence": "specific quote from text",
+      "emotion_link": "associated emotion",
+      "confidence": "low|medium|high"
+    }}
+  ],
+  "explanation": "Emotion-focused one sentence summary grounded in text",
+  "requires_crisis_intervention": false
+}}
+```
+
+Return ONLY the JSON object.

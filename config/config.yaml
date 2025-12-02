@@ -1,0 +1,186 @@
+# Main configuration for Explainable Mental Health Detection System
+
+# Data paths
+data:
+  paths:
+    raw: data/raw
+    processed: data/processed
+    mock: data/mock
+    outputs: outputs
+  
+  # Dataset-specific paths
+  datasets:
+    dreaddit: data/raw/dreaddit.csv
+    clpsych: data/raw/clpsych.csv
+    erisk: data/raw/erisk.csv
+    rsdd: data/raw/rsdd.csv
+
+# Model configuration
+model:
+  name: distilbert-base-uncased  # Options: distilbert-base-uncased, bert-base-uncased, roberta-base
+  max_length: 256
+  num_labels: 2  # binary: depressed vs not-depressed
+  dropout: 0.1
+
+# Training configuration
+training:
+  batch_size: 16
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  epochs: 3
+  warmup_steps: 500
+  seed: 42
+  gradient_accumulation_steps: 1
+  fp16: false  # Enable mixed precision training if GPU supports it
+  
+  # Early stopping
+  early_stopping_patience: 3
+  early_stopping_threshold: 0.001
+  
+  # Checkpointing
+  save_strategy: epoch
+  save_total_limit: 2
+  load_best_model_at_end: true
+
+# LLM configuration
+llm:
+  provider: groq  # Options: openai, groq, huggingface, local
+  model: llama-3.1-70b  # See models section below for options
+  temperature: 0.2
+  max_tokens: 512
+  top_p: 1.0
+  
+  # Prompt templates directory
+  prompts_dir: config/prompts
+  
+  # API Configuration
+  api:
+    openai:
+      model: gpt-4o-mini  # Options: gpt-4, gpt-4o, gpt-4o-mini, gpt-3.5-turbo
+      api_key_env: OPENAI_API_KEY
+      base_url: https://api.openai.com/v1
+    
+    groq:
+      model: llama-3.1-70b  # Options: llama-3.1-70b, llama-3.1-8b, mixtral-8x7b, gemma2-9b
+      api_key_env: GROQ_API_KEY
+      base_url: https://api.groq.com/openai/v1
+      
+      # Available Groq models:
+      models:
+        llama-3.1-70b:        # Best quality, balanced speed
+          full_name: llama-3.1-70b-versatile
+          cost_per_1k: 0.00005
+          description: "Latest Llama 3.1, 70B params, best quality"
+        
+        llama-3.1-8b:         # Fast, good quality
+          full_name: llama-3.1-8b-instant
+          cost_per_1k: 0.00005
+          description: "Llama 3.1, 8B params, very fast"
+        
+        llama3-70b:           # Previous generation
+          full_name: llama3-70b-8192
+          cost_per_1k: 0.00059
+          description: "Llama 3.0, 70B params"
+        
+        llama3-8b:            # Previous generation, fast
+          full_name: llama3-8b-8192
+          cost_per_1k: 0.00005
+          description: "Llama 3.0, 8B params, fast"
+        
+        mixtral-8x7b:         # Mixture of experts
+          full_name: mixtral-8x7b-32768
+          cost_per_1k: 0.00024
+          description: "Mixtral 8x7B, mixture of experts"
+        
+        gemma-7b:             # Google model
+          full_name: gemma-7b-it
+          cost_per_1k: 0.00007
+          description: "Google Gemma 7B"
+        
+        gemma2-9b:            # Latest Google model
+          full_name: gemma2-9b-it
+          cost_per_1k: 0.00020
+          description: "Google Gemma 2, 9B params"
+  
+  # Local LLM settings (for LLaMA, Mistral, etc.)
+  local_model_path: models/llm/llama-7b
+  quantization: 4bit  # Options: none, 4bit, 8bit
+  use_flash_attention: true
+
+# Explainability configuration
+explainability:
+  methods:
+    - attention  # Token-level attention extraction
+    - integrated_gradients  # Saliency-based attribution
+    - llm_rationales  # LLM-generated explanations
+    - rule_based  # DSM-5/PHQ-9 keyword matching
+  
+  attention:
+    aggregation: mean  # Options: mean, max, last_layer
+    num_layers: 6
+  
+  integrated_gradients:
+    n_steps: 50
+    internal_batch_size: 8
+
+# Evaluation configuration
+evaluation:
+  metrics:
+    classification:
+      - accuracy
+      - precision
+      - recall
+      - f1
+      - roc_auc
+    
+    explanation:
+      - fluency
+      - reliability
+      - completeness
+      - faithfulness
+      - perturbation_stability
+  
+  # Explanation evaluation thresholds
+  thresholds:
+    fluency_min: 0.6
+    reliability_min: 0.5
+    completeness_min: 0.7
+
+# Safety and ethics configuration
+safety:
+  enable_checks: true
+  enable_crisis_routing: true
+  
+  # Crisis resources
+  crisis_resources:
+    - "National Suicide Prevention Lifeline: 988"
+    - "Crisis Text Line: Text HOME to 741741"
+    - "International Association for Suicide Prevention: https://www.iasp.info/resources/Crisis_Centres/"
+  
+  # Content filtering
+  filter_medical_claims: true
+  filter_diagnostic_statements: true
+  
+  # Disclaimer message
+  disclaimer: |
+    This tool is for informational purposes only and does not provide medical advice, 
+    diagnosis, or treatment. If you are experiencing a mental health crisis, please 
+    contact emergency services or a crisis helpline immediately.
+
+# Logging configuration
+logging:
+  level: INFO  # Options: DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  save_to_file: true
+  log_dir: outputs/logs
+
+# Device configuration
+device:
+  auto_detect: true  # Automatically detect CUDA availability
+  fallback_to_cpu: true
+  mixed_precision: false
+
+# Reproducibility
+reproducibility:
+  deterministic: true
+  benchmark: false  # Set to true for faster training if reproducibility not critical
